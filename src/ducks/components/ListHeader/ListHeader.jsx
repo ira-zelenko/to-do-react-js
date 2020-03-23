@@ -5,7 +5,7 @@ export default class ListHeader extends Component {
   render() {
     return (
       <div className={styles.container}>
-        {'ListHeader'}
+        {'ToDo List'}
       </div>
     )
   }

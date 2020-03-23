@@ -1,15 +1,19 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+import styles from './ListContainer.pcss'
 
+const ListContainer = (props) => {
+  const { children } = props
+  return (
+   <div className={styles.container}>
+     {children}
+   </div>
+  )
+}
 
-class ListContainer extends Component {
-  render() {
-    return (
-     <div>
-       {'ListContainer'}
-     </div>
-    )
-  }
+ListContainer.propTypes = {
+  children: PropTypes.node,
 }
 
 export default connect()(ListContainer)
