@@ -74,6 +74,7 @@ const ListItem = (props) => {
          <Fragment>
            <div>
              <input
+               className={styles.input}
                type="text"
                autoFocus={true}
                value={inputValue}
