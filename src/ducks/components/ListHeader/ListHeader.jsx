@@ -1,12 +1,12 @@
-import React, { Component } from 'react'
+import React from 'react'
 import styles from './ListHeader.pcss'
 
-export default class ListHeader extends Component {
-  render() {
-    return (
-      <div className={styles.container}>
-        {'ToDo List'}
-      </div>
-    )
-  }
+const ListHeader = () => {
+  return (
+    <div className={styles.container}>
+      {'ToDo List'}
+    </div>
+  )
 }
+
+export default ListHeader;

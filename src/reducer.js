@@ -1,4 +1,4 @@
 import { combineReducers } from 'redux'
-const reducer = combineReducers({})
+import list from './ducks/index'
 
-export default reducer
+export default combineReducers({ list })
