@@ -9,7 +9,8 @@ module.exports = {
         '--color-white-base': '#ffffff',
         '--color-item-active': '#46d1de',
         '--color-item-close': '#f44560',
-        '--color-item-deleted': '#c8c8c8',
+        '--color-item-deleted': '#e5e5e5',
+        '--color-grey-additional': '#c8c8c8',
 
         '--shadow-default': '0 1px 2px 0 rgba(0, 0, 0, 0.1)'
       }

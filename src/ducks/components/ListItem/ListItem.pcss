@@ -6,13 +6,16 @@
 
   position: relative;
 
-  box-sizing: border-box;
   background-color: var(--color-white-base);
   border: 1px solid var(--color-white-base);
   border-radius: 4px;
   box-shadow: var(--shadow-default);
 
   transition: border .25s ease;
+
+  cursor: pointer;
+
+  color: var(--color-text-base);
 }
 .element:hover {
   border: 1px solid var(--color-item-active);
@@ -20,6 +23,10 @@
 
 .element.closed:hover {
   border: 1px solid var(--color-item-close);
+}
+
+.element.deleted {
+  color: var(--color-grey-additional);
 }
 
 .element.deleted:hover {
@@ -36,6 +43,8 @@
 
   border-radius: 4px 4px 0 0;
   background: var(--color-item-active);
+
+  transition: background .25s ease;
 }
 
 .mark.closed {
@@ -57,10 +66,6 @@
 }
 
 .checkbox {
-
-}
-
-.text {
 
 }
 

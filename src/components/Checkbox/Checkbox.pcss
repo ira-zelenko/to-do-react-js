@@ -1,0 +1,50 @@
+.element {
+  cursor: pointer;;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+}
+
+.eventInput {
+  display: none;
+}
+
+.control {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+
+  position: relative;
+  top: -1px;
+
+  display: inline-flex;
+
+  border-radius: 2px;
+  border: solid 1px var(--color-grey-additional);
+  background-color: white;
+
+  transition: all .3s ease;
+}
+
+.control.checked:after {
+  content: '';
+  position: relative;
+  left: 3px;
+  width: 5px;
+  height: 10px;
+  border: solid #757575;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+  .label {
+  display: inline-flex;
+}
+
+.checked {
+
+}

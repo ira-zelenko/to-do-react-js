@@ -1,12 +1,18 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import { toggleClosedStatus } from '../../../ducks/index'
 import ListHeader from '../../components/ListHeader'
 import ListItem from '../../components/ListItem'
 import styles from './ListContainer.pcss'
 
 const ListContainer = (props) => {
-  const { items } = props
+  const { items, toggleClosedStatus } = props
+
+  const changeCloseStatus = useCallback((id) => {
+    toggleClosedStatus(id)
+  }, [items])
+
   return (
    <div className={styles.container}>
      <ListHeader />
@@ -15,8 +21,10 @@ const ListContainer = (props) => {
         <React.Fragment key={item.id}>
           <ListItem
             text={item.text}
-            isDeleted={item.deleted}
-            isClosed={item.close}
+            deleted={item.deleted}
+            closed={item.closed}
+            id={item.id}
+            changeCloseStatus={changeCloseStatus}
           />
         </React.Fragment>
       ))}
@@ -31,8 +39,13 @@ const mapStateToProps = (state) => {
   }
 }
 
-ListContainer.propTypes = {
-  items: PropTypes.array,
+const mapDispatchToProps = {
+  toggleClosedStatus,
 }
 
-export default connect(mapStateToProps)(ListContainer)
+ListContainer.propTypes = {
+  items: PropTypes.array,
+  toggleClosedStatus: PropTypes.func,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ListContainer)

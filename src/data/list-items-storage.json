@@ -2,43 +2,43 @@
   {
     "id": 1,
     "text": "ReactJS",
-    "close": false,
+    "closed": false,
     "deleted": false
   },
   {
     "id": 2,
     "text": "React + Redux",
-    "close": false,
+    "closed": false,
     "deleted": true
   },
   {
     "id": 3,
     "text": "Vue",
-    "close": false,
+    "closed": false,
     "deleted": false
   },
   {
     "id": 4,
     "text": "Angular",
-    "close": true,
+    "closed": true,
     "deleted": false
   },
   {
     "id": 5,
     "text": "Hello world app",
-    "close": true,
+    "closed": true,
     "deleted": false
   },
   {
     "id": 6,
     "text": "Todo List",
-    "close": true,
+    "closed": true,
     "deleted": true
   },
   {
     "id": 7,
     "text": "Walk in park",
-    "close": false,
+    "closed": false,
     "deleted": true
   }
 ]
