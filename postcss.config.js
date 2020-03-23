@@ -11,6 +11,7 @@ module.exports = {
         '--color-item-close': '#f44560',
         '--color-item-deleted': '#e5e5e5',
         '--color-grey-additional': '#c8c8c8',
+        '--color-grey-dark': '#757575',
 
         '--shadow-default': '0 1px 2px 0 rgba(0, 0, 0, 0.1)'
       }

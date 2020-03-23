@@ -18,7 +18,7 @@ const Checkbox = (props) => {
           name={name.toString()}
           type={'checkbox'}
           checked={checked}
-          onChange={() => {toggleValue()}}
+          onChange={toggleValue}
         />
         <div
           className={cn(styles.control, {
