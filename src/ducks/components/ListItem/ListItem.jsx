@@ -57,23 +57,26 @@ const ListItem = (props) => {
   })
 
   return (
-    <div
-      className={cn(styles.element, {
-        [styles.closed]: closed,
-        [styles.deleted]: deleted,
-      })}
-      ref={listItem}
-      onDoubleClick={(event) => {
-        toggleLabelInput(true)
-      }}
+    <div className={cn(styles.wrap, {
+      [styles.deleted]: deleted,
+    })}>
+      <div
+        className={cn(styles.element, {
+          [styles.closed]: closed,
+          [styles.deleted]: deleted,
+        })}
+        ref={listItem}
+        onDoubleClick={(event) => {
+          toggleLabelInput(true)
+        }}
 
-    >
-      <div className={cn(styles.mark, {
-        [styles.closed]: closed,
-        [styles.deleted]: deleted,
-      })} />
-      <div className={styles.content}>
-        {!isInputOpen &&
+      >
+        <div className={cn(styles.mark, {
+          [styles.closed]: closed,
+          [styles.deleted]: deleted,
+        })} />
+        <div className={styles.content}>
+          {!isInputOpen &&
           <Fragment>
             <Checkbox
               name={id}
@@ -84,7 +87,7 @@ const ListItem = (props) => {
             <div>
               <EditSvg
                 className={styles.icon}
-                onClick={(event) => {
+                onClick={() => {
                   toggleLabelInput(true)
                 }}
               />
@@ -94,23 +97,24 @@ const ListItem = (props) => {
               />
             </div>
           </Fragment>
-        }
-        {isInputOpen &&
-         <Fragment>
-           <div className={styles.inputWrap}>
-             <InputField
-               placeHolderText={'Add task'}
-               value={inputValue}
-               onChange={onInputChange}
-               onKeyPress={onInputKeyPress}
-             />
-           </div>
-           <SaveSvg
-             className={styles.icon}
-             onClick={() => toggleLabelInput(false)}
-           />
-         </Fragment>
-        }
+          }
+          {isInputOpen &&
+          <Fragment>
+            <div className={styles.inputWrap}>
+              <InputField
+                placeHolderText={'Add task'}
+                value={inputValue}
+                onChange={onInputChange}
+                onKeyPress={onInputKeyPress}
+              />
+            </div>
+            <SaveSvg
+              className={styles.icon}
+              onClick={() => toggleLabelInput(false)}
+            />
+          </Fragment>
+          }
+        </div>
       </div>
     </div>
   )
