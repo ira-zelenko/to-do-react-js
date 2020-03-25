@@ -2,6 +2,7 @@ import React, { Fragment, useCallback, useState, useEffect, useRef } from 'react
 import PropTypes from 'prop-types'
 import cn from 'classnames'
 import Checkbox from '../../../components/Checkbox'
+import InputField from '../../../components/InputField'
 import DeleteSvg from './icons/delete.svg'
 import EditSvg from './icons/pencil.svg'
 import SaveSvg from './icons/save.svg'
@@ -96,13 +97,10 @@ const ListItem = (props) => {
         }
         {isInputOpen &&
          <Fragment>
-           <div>
-             <input
-               className={styles.input}
-               type="text"
-               autoFocus={true}
+           <div className={styles.inputWrap}>
+             <InputField
                value={inputValue}
-               onChange={(event) => onInputChange(event)}
+               onChange={onInputChange}
                onKeyPress={onInputKeyPress}
              />
            </div>
