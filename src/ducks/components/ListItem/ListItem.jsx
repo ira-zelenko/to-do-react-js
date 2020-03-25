@@ -21,7 +21,6 @@ const ListItem = (props) => {
     if (isInputOpen) {
       editItemLabel(id, inputValue)
     }
-
   }, [isInputOpen, inputValue])
 
   const onInputChange = useCallback((event) => {
@@ -39,10 +38,13 @@ const ListItem = (props) => {
   })
 
   return (
-    <div className={cn(styles.element, {
-      [styles.closed]: closed,
-      [styles.deleted]: deleted,
-    })}>
+    <div
+      className={cn(styles.element, {
+        [styles.closed]: closed,
+        [styles.deleted]: deleted,
+      })}
+       onDoubleClick={toggleLabelInput}
+    >
       <div className={cn(styles.mark, {
         [styles.closed]: closed,
         [styles.deleted]: deleted,
@@ -50,14 +52,12 @@ const ListItem = (props) => {
       <div className={styles.content}>
         {!isInputOpen &&
           <Fragment>
-            <div>
-              <Checkbox
-                name={id}
-                label={text}
-                checked={closed}
-                onChange={changeCloseStatus}
-              />
-            </div>
+            <Checkbox
+              name={id}
+              label={text}
+              checked={closed}
+              onChange={changeCloseStatus}
+            />
             <div className={styles.controls}>
               <EditSvg
                 className={styles.icon}

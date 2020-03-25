@@ -42,7 +42,6 @@ export default function reducer(state = defaultState, action) {
         items: updateItemStatus(state.items, action.id, 'deleted')
       }
     case EDIT_ITEM_LABEL:
-      console.log()
       return  {
         ...state,
         items: updateItemLabel(state.items, action.id, action.label, 'text')

@@ -1,31 +1,49 @@
 .element {
-  cursor: pointer;;
-}
-
-.checkbox {
+  cursor: pointer;
   display: flex;
   align-items: center;
 }
 
-.eventInput {
-  display: none;
+.checkbox {
+  display: block;
+  position: relative;
+  width: 0px;
+  height: 0px;
+  margin: 0;
+  cursor: pointer;
 }
 
-.control {
+.checkbox:after,
+.checkbox.checked:after {
+  content: '';
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   width: 16px;
   height: 16px;
-  margin-right: 8px;
 
-  position: relative;
-  top: -1px;
-
-  display: inline-flex;
+  position: absolute;
+  top: -8px;
+  left: 0;
 
   border-radius: 2px;
   border: solid 1px var(--color-grey-additional);
   background-color: white;
 
+  font-size: 16px;
+  color: var(--color-grey-dark);
+
   transition: all .3s ease;
+}
+
+.checkbox.checked:after {
+  content: '\2714';
+}
+
+.label {
+  margin-left: 24px;
+  cursor: pointer;
 }
 
 .control.checked:after {

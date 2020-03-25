@@ -11,23 +11,23 @@ const Checkbox = (props) => {
   }, [])
 
   return (
-    <label className={styles.element}>
-      <div className={styles.checkbox}>
-        <input
-          className={styles.eventInput}
-          name={name.toString()}
-          type={'checkbox'}
-          checked={checked}
-          onChange={toggleValue}
-        />
-        <div
-          className={cn(styles.control, {
-            [styles.checked]: checked,
-          })}
-        />
-        <span>{label}</span>
-      </div>
-    </label>
+    <div className={styles.element}>
+      <input
+        className={cn(styles.checkbox, {
+          [styles.checked]: checked,
+        })}
+        name={name.toString()}
+        type={'checkbox'}
+        checked={checked}
+        onChange={toggleValue}
+      />
+      {/*<div*/}
+      {/*  className={cn(styles.control, {*/}
+      {/*    [styles.checked]: checked,*/}
+      {/*  })}*/}
+      {/*/>*/}
+      <label className={styles.label}>{label}</label>
+    </div>
   )
 }
 
