@@ -1,5 +1,4 @@
 import React, { Fragment, useCallback, useState, useEffect, useRef } from 'react'
-import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import cn from 'classnames'
 import Checkbox from '../../../components/Checkbox'
@@ -12,7 +11,6 @@ const ListItem = (props) => {
   const { text, deleted, closed, id, changeCloseStatus, markDeletedItem, editItemLabel, index } = props
   const [ isInputOpen, openInput ] = useState(false)
   const [ inputValue, setInputValue ] = useState(text)
-  const [ editedElement, setEditedElement ] = useState(null)
 
   const listItem = useRef(null)
 
@@ -25,11 +23,8 @@ const ListItem = (props) => {
   })
 
   const handleClick = (event) => {
-    if (editedElement) {
-      if (!event.path.includes(editedElement)  ) {
-        toggleLabelInput(false)
-        setEditedElement(null)
-      }
+    if (!event.path.includes(listItem.current)  ) {
+      toggleLabelInput(false)
     }
   }
 
@@ -69,7 +64,6 @@ const ListItem = (props) => {
       ref={listItem}
       onDoubleClick={(event) => {
         toggleLabelInput(true)
-        setEditedElement(event.target)
       }}
 
     >
@@ -91,7 +85,6 @@ const ListItem = (props) => {
                 className={styles.icon}
                 onClick={(event) => {
                   toggleLabelInput(true)
-                  setEditedElement(ReactDOM.findDOMNode(listItem.current))
                 }}
               />
               <DeleteSvg
