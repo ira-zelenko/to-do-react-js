@@ -62,7 +62,6 @@ function updateItemStatus(items, id, field) {
 }
 
 function updateItemLabel(items, id, label, field) {
-  console.log(label)
   return items.map(item => {
     if (item.id === id) {
       item[field] = label

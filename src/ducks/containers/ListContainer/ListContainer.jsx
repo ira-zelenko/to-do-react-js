@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useRef } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { toggleClosedStatus, markDeletedItem, editItemLabel  } from '../../../ducks/index'
@@ -8,29 +8,32 @@ import styles from './ListContainer.pcss'
 
 const ListContainer = (props) => {
   const { items, toggleClosedStatus, markDeletedItem, editItemLabel } = props
+  const container = useRef(null)
 
   const changeCloseStatus = useCallback((id) => {
     toggleClosedStatus(id)
   }, [items])
 
   return (
-   <div className={styles.container}>
+   <div className={styles.container} ref={container}>
      <ListHeader />
-    <div className={styles.listWrap}>
-      {items.map((item) => (
-        <React.Fragment key={item.id}>
-          <ListItem
-            text={item.text}
-            deleted={item.deleted}
-            closed={item.closed}
-            id={item.id}
-            changeCloseStatus={changeCloseStatus}
-            markDeletedItem={markDeletedItem}
-            editItemLabel={editItemLabel}
-          />
-        </React.Fragment>
-      ))}
-    </div>
+      <div className={styles.listWrap}>
+        {items.map((item, index) => (
+          <React.Fragment key={item.id}>
+            <ListItem
+              text={item.text}
+              deleted={item.deleted}
+              closed={item.closed}
+              id={item.id}
+              changeCloseStatus={changeCloseStatus}
+              markDeletedItem={markDeletedItem}
+              editItemLabel={editItemLabel}
+              refVal={item.id}
+              index={index}
+            />
+          </React.Fragment>
+        ))}
+      </div>
    </div>
   )
 }
