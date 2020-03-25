@@ -25,6 +25,15 @@ export function editItemLabel(id, label) {
   }
 }
 
+export const ADD_ITEM_TO_LIST = 'ADD_ITEM_TO_LIST'
+export function addItemToList(item) {
+
+  return {
+    type: ADD_ITEM_TO_LIST,
+    item
+  }
+}
+
 const defaultState = {
   items: itemsList || [],
 }
@@ -44,7 +53,12 @@ export default function reducer(state = defaultState, action) {
     case EDIT_ITEM_LABEL:
       return  {
         ...state,
-        items: updateItemLabel(state.items, action.id, action.label, 'text')
+        items: updateItemLabel(state.items, action.id, action.label)
+      }
+    case ADD_ITEM_TO_LIST:
+      return {
+        ...state,
+        items: [action.item, ...state.items]
       }
 
     default:
@@ -61,10 +75,10 @@ function updateItemStatus(items, id, field) {
   })
 }
 
-function updateItemLabel(items, id, label, field) {
+function updateItemLabel(items, id, label) {
   return items.map(item => {
     if (item.id === id) {
-      item[field] = label
+      item.text = label
     }
     return item
   })

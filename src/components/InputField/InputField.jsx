@@ -5,9 +5,8 @@ import styles from './InputField.pcss'
 
 const InputField = (props) => {
 
-  const {value, onChange, onKeyPress, tall, withInsideButton, buttonText } = props
+  const {value, onChange, onKeyPress, tall, withInsideButton, buttonText, placeHolderText, onClick } = props
 
-  console.log(withInsideButton)
   return (
    <div className={styles.element}>
      <input
@@ -15,13 +14,21 @@ const InputField = (props) => {
          [styles.tall]: tall,
        })}
        type="text"
+       placeholder={placeHolderText}
        autoFocus={true}
        value={value}
-       onChange={(event) => onChange(event)}
+       onChange={onChange}
        onKeyPress={onKeyPress}
      />
      {withInsideButton &&
-      <div className={styles.button}>{buttonText}</div>
+      <div
+        className={cn(styles.button, {
+          [styles.disable]: !value,
+        })}
+        onClick={onClick}
+      >
+        {buttonText}
+      </div>
      }
 
    </div>
@@ -30,7 +37,9 @@ const InputField = (props) => {
 
 InputField.propTypes = {
   value: PropTypes.string,
+  placeHolderText: PropTypes.string,
   onChange:PropTypes.func,
+  onClick:PropTypes.func,
   onKeyPress: PropTypes.func,
   isTopAngled: PropTypes.bool,
   withInsideButton: PropTypes.bool,

@@ -99,6 +99,7 @@ const ListItem = (props) => {
          <Fragment>
            <div className={styles.inputWrap}>
              <InputField
+               placeHolderText={'Add task'}
                value={inputValue}
                onChange={onInputChange}
                onKeyPress={onInputKeyPress}
