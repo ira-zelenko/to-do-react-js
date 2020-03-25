@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { toggleClosedStatus, markDeletedItem, editItemLabel  } from '../../../ducks/index'
 import ListHeader from '../../components/ListHeader'
 import ListItem from '../../components/ListItem'
+import InputField from '../../../components/InputField'
 import styles from './ListContainer.pcss'
 
 const ListContainer = (props) => {
@@ -17,6 +18,13 @@ const ListContainer = (props) => {
   return (
    <div className={styles.container} ref={container}>
      <ListHeader />
+     <div className={styles.inputWrap}>
+       <InputField
+         tall={true}
+         withInsideButton={true}
+         buttonText={'ADD'}
+       />
+     </div>
       <div className={styles.listWrap}>
         {items.map((item, index) => (
           <React.Fragment key={item.id}>

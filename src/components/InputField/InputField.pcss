@@ -1,10 +1,14 @@
+.element {
+  position: relative;
+}
+
 .input {
   box-sizing: border-box;
   margin: 0;
   padding: 9px 16px;
 
   height: 32px;
-  width: 480px;
+  width: 100%;
 
   background: var(--color-white-base);
   color: var(--color-text-base);
@@ -14,4 +18,25 @@
   box-shadow: inset 0px 1px 2px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
   outline: none;
+}
+
+.tall {
+  height: 40px;
+}
+
+.button {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+
+  display: flex;
+  align-items: center;
+
+  height: 100%;
+  padding: 0px 16px;
+
+  color: var(--color-white-base);
+  background: var(--color-theme);
+  border-radius: 0px 4px 4px 0px;
+  cursor: pointer;
 }
