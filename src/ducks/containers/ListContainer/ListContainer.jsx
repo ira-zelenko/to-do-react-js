@@ -13,10 +13,12 @@ const ListContainer = (props) => {
   const [ inputValue, setInputValue ] = useState('')
   const [ filteredItems, setFilteredItems ] = useState(items)
   const [ filter, setFilter] = useState(null)
+  const [ activeItemsCount  , setActiveItemsCount ] = useState(0)
 
   useEffect(() => {
     setFilteredItems(items)
     filterListItems(filter)
+    recountActiveItems()
   }, [ items ])
 
   const changeCloseStatus = useCallback((id) => {
@@ -25,7 +27,7 @@ const ListContainer = (props) => {
 
   const addItemList = useCallback(() => {
     const newItem = {
-      id: items.length + 1,
+      id: Number((Math.random() * 100).toFixed(0)),
       text: inputValue,
       closed: false,
       deleted: false,
@@ -48,24 +50,36 @@ const ListContainer = (props) => {
     }
   }, [inputValue])
 
-  const filterList = useCallback((filter) => {
-      switch (filter) {
-        case 'all':
-          return items
-        case 'active':
-          return items.filter(item => item.closed === false)
-        case 'completed':
-          return items.filter(item => item.closed === true)
-        default:
-          return items
-      }
-  }, [ items ])
-
   const filterListItems = useCallback((filter) => {
     setFilter(filter)
     const items = filterList(filter)
     setFilteredItems(items)
   }, [ items ])
+
+  function filterList(filter) {
+    switch (filter) {
+      case 'all':
+        return items
+
+      case 'active':
+        return items.filter(item => item.closed === false)
+
+      case 'completed':
+        return items.filter(item => item.closed === true)
+
+      default:
+        return items
+    }
+  }
+
+  function recountActiveItems() {
+    setActiveItemsCount(0)
+    items.map(item => {
+      if(!item.closed) {
+        setActiveItemsCount(activeItemsCount => activeItemsCount + 1);
+      }
+    })
+  }
 
   return (
    <div className={styles.container}>
@@ -77,20 +91,19 @@ const ListContainer = (props) => {
            {
              label: 'All',
              value: 'all',
-             disabled: false,
-           },
-           {
+             disabled: filteredItems.length === 0,
+           }, {
              label: 'Active',
              value: 'active',
-             disabled: false,
-           },
-           {
+             disabled: activeItemsCount === 0,
+           }, {
              label: 'Completed',
              value: 'completed',
-             disabled: false,
+             disabled: filteredItems.length - activeItemsCount === 0,
            },
          ]}
          onClick={filterListItems}
+         inactive={!filteredItems.length}
        />
      </ListHeader>
      <div className={styles.inputWrap}>

@@ -33,7 +33,7 @@ const ListItem = (props) => {
     markDeletedItem(id)
     setTimeout(() => {
       deletedItem(id)
-    }, 700)
+    }, 500)
   }, [])
 
   const toggleLabelInput = useCallback((isOpened) => {

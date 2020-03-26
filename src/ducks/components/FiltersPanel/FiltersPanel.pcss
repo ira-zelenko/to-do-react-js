@@ -29,11 +29,17 @@
 .filter.disabled {
   color: var(--color-deep-ocean-medium);
   background: inherit;
+  pointer-events: none;
   cursor: not-allowed;
 }
 
 .filter.active {
-  background: red;
+  color: var(--color-white-base);
+  background: var(--color-deep-ocean);
+}
+
+.filter.inactive {
+  opacity: .2;
 }
 
 .filter:first-child {
