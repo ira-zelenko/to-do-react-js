@@ -9,7 +9,7 @@ import SaveSvg from './icons/save.svg'
 import styles from './ListItem.pcss'
 
 const ListItem = (props) => {
-  const { text, deleted, closed, id, changeCloseStatus, markDeletedItem, editItemLabel, deletedItem } = props
+  const { text, deleted, closed, id, changeCloseStatus, markDeletedItem, editItemLabel, deletedItem, maxLabelLength } = props
   const [ isInputOpen, openInput ] = useState(false)
   const [ inputValue, setInputValue ] = useState(text)
 
@@ -38,7 +38,12 @@ const ListItem = (props) => {
 
   const toggleLabelInput = useCallback((isOpened) => {
     openInput(isOpened)
-    if (isInputOpen) {
+
+    if (!inputValue) {
+      setInputValue(text)
+    }
+
+    if (isInputOpen && inputValue) {
       editItemLabel(id, inputValue)
     }
   }, [
@@ -49,15 +54,17 @@ const ListItem = (props) => {
   const onInputChange = useCallback((event) => {
     const newLabel = String(event.target.value)
     setInputValue(newLabel)
-  })
+  }, [inputValue])
 
   const onInputKeyPress = useCallback((event) => {
     if (event.key === 'Enter') {
       openInput(false)
       onInputChange(event)
-      editItemLabel(id, inputValue)
+      if (inputValue) {
+        editItemLabel(id, inputValue)
+      }
     }
-  })
+  }, [inputValue])
 
   return (
     <div className={cn(styles.wrap, {
@@ -69,7 +76,7 @@ const ListItem = (props) => {
           [styles.deleted]: deleted,
         })}
         ref={listItem}
-        onDoubleClick={(event) => {
+        onDoubleClick={() => {
           toggleLabelInput(true)
         }}
 
@@ -109,6 +116,7 @@ const ListItem = (props) => {
                 value={inputValue}
                 onChange={onInputChange}
                 onKeyPress={onInputKeyPress}
+                maxLength={maxLabelLength}
               />
             </div>
             <SaveSvg
@@ -131,6 +139,7 @@ ListItem.propTypes = {
   changeCloseStatus: PropTypes.func,
   markDeleted: PropTypes.func,
   editItemLabel: PropTypes.func,
+  maxLabelLength: PropTypes.number,
 }
 
 export default ListItem

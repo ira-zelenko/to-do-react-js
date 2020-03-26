@@ -15,6 +15,8 @@ const ListContainer = (props) => {
   const [ filter, setFilter] = useState(null)
   const [ activeItemsCount  , setActiveItemsCount ] = useState(0)
 
+  const MAX_STRING_LENGTH = 70
+
   useEffect(() => {
     setFilteredItems(items)
     filterListItems(filter)
@@ -116,6 +118,7 @@ const ListContainer = (props) => {
          onChange={onInputChange}
          onKeyPress={onInputKeyPress}
          onClick={addItemList}
+         maxLength={MAX_STRING_LENGTH}
        />
      </div>
       <div className={styles.listWrap}>
@@ -132,6 +135,7 @@ const ListContainer = (props) => {
               editItemLabel={editItemLabel}
               refVal={item.id}
               index={index}
+              maxLabelLength={MAX_STRING_LENGTH}
             />
           </React.Fragment>
         ))}

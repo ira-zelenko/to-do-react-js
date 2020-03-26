@@ -5,7 +5,7 @@ import styles from './InputField.pcss'
 
 const InputField = (props) => {
 
-  const {value, onChange, onKeyPress, tall, withInsideButton, buttonText, placeHolderText, onClick } = props
+  const {value, onChange, onKeyPress, tall, withInsideButton, buttonText, placeHolderText, onClick, maxLength } = props
 
   return (
    <div className={styles.element}>
@@ -19,6 +19,7 @@ const InputField = (props) => {
        value={value}
        onChange={onChange}
        onKeyPress={onKeyPress}
+       maxLength={maxLength}
      />
      {withInsideButton &&
       <div
@@ -43,6 +44,7 @@ InputField.propTypes = {
   onKeyPress: PropTypes.func,
   isTopAngled: PropTypes.bool,
   withInsideButton: PropTypes.bool,
+  maxLength: PropTypes.number,
 }
 
 export default InputField
