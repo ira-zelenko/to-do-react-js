@@ -9,10 +9,14 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "babel-eslint": "^10.1.0",
     "babel-loader": "^8.0.6",
     "babel-preset-react": "^6.24.1",
     "classnames": "^2.2.6",
     "css-loader": "^3.4.2",
+    "eslint": "^6.8.0",
+    "eslint-plugin-babel": "^5.3.0",
+    "eslint-plugin-react": "^7.19.0",
     "html-webpack-plugin": "^3.2.0",
     "less": "^3.11.1",
     "less-loader": "^5.0.0",
@@ -40,7 +44,9 @@
     "start": "webpack-dev-server --mode development --open --hot",
     "build": "webpack --mode production",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "yarn eslint",
+    "eslint": "eslint --ext js,jsx src/"
   },
   "eslintConfig": {
     "extends": "react-app"

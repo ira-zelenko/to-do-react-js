@@ -34,7 +34,7 @@ const FiltersPanel = (props) => {
 
 FiltersPanel.propTypes = {
   items: PropTypes.array,
-  getFilterValue: PropTypes.func,
+  onClick: PropTypes.func,
   inactive: PropTypes.bool,
 }
 

@@ -17,7 +17,7 @@ export function markDeletedItem(id) {
 }
 
 export const DELETE_ITEM = 'DELETE_ITEM'
-export function deletedItem(id) {
+export function deleteItem(id) {
   return {
     type: DELETE_ITEM,
     id,
@@ -38,7 +38,7 @@ export function addItemToList(item) {
 
   return {
     type: ADD_ITEM_TO_LIST,
-    item
+    item,
   }
 }
 
@@ -51,12 +51,12 @@ export default function reducer(state = defaultState, action) {
     case TOGGLE_CLOSED_STATUS:
       return {
         ...state,
-        items: updateItemStatus(state.items, action.id, 'closed')
+        items: updateItemStatus(state.items, action.id, 'closed'),
       }
     case MARK_DELETED_ITEM:
       return {
         ...state,
-        items: updateItemStatus(state.items, action.id, 'deleted')
+        items: updateItemStatus(state.items, action.id, 'deleted'),
       }
     case DELETE_ITEM:
       return {
@@ -64,14 +64,14 @@ export default function reducer(state = defaultState, action) {
         items: state.items.filter(item => item.id !== action.id),
       }
     case EDIT_ITEM_LABEL:
-      return  {
+      return {
         ...state,
-        items: updateItemLabel(state.items, action.id, action.label)
+        items: updateItemLabel(state.items, action.id, action.label),
       }
     case ADD_ITEM_TO_LIST:
       return {
         ...state,
-        items: [action.item, ...state.items]
+        items: [action.item, ...state.items],
       }
 
     default:

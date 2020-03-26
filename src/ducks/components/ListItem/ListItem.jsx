@@ -9,22 +9,22 @@ import SaveSvg from './icons/save.svg'
 import styles from './ListItem.pcss'
 
 const ListItem = (props) => {
-  const { text, deleted, closed, id, changeCloseStatus, markDeletedItem, editItemLabel, deletedItem, maxLabelLength } = props
+  const { text, deleted, closed, id, changeCloseStatus, markDeletedItem, editItemLabel, deleteItem, maxLabelLength } = props
   const [ isInputOpen, openInput ] = useState(false)
   const [ inputValue, setInputValue ] = useState(text)
 
   const listItem = useRef(null)
 
   useEffect(() => {
-    document.addEventListener('click', handleClick);
+    document.addEventListener('click', handleClick)
 
     return () => {
-      document.removeEventListener('click', handleClick);
+      document.removeEventListener('click', handleClick)
     }
   })
 
   const handleClick = (event) => {
-    if (!event.path.includes(listItem.current)  ) {
+    if (!event.path.includes(listItem.current) ) {
       toggleLabelInput(false)
     }
   }
@@ -32,7 +32,7 @@ const ListItem = (props) => {
   const markDeleted = useCallback(() => {
     markDeletedItem(id)
     setTimeout(() => {
-      deletedItem(id)
+      deleteItem(id)
     }, 500)
   }, [])
 
@@ -140,6 +140,10 @@ ListItem.propTypes = {
   markDeleted: PropTypes.func,
   editItemLabel: PropTypes.func,
   maxLabelLength: PropTypes.number,
+  deleted: PropTypes.bool,
+  closed: PropTypes.bool,
+  markDeletedItem: PropTypes.func,
+  deleteItem: PropTypes.func,
 }
 
 export default ListItem

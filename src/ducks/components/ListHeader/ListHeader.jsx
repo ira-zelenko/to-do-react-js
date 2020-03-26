@@ -14,6 +14,7 @@ const ListHeader = (props) => {
 
 ListHeader.propTypes = {
   headerValue: PropTypes.string,
+  children: PropTypes.node,
 }
 
-export default ListHeader;
+export default ListHeader

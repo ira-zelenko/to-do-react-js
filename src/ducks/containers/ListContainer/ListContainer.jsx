@@ -1,7 +1,7 @@
 import React, { useCallback, useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { toggleClosedStatus, markDeletedItem, editItemLabel, addItemToList, deletedItem } from '../../../ducks/index'
+import { toggleClosedStatus, markDeletedItem, editItemLabel, addItemToList, deleteItem } from '../../../ducks/index'
 import ListHeader from '../../components/ListHeader'
 import ListItem from '../../components/ListItem'
 import InputField from '../../../components/InputField'
@@ -9,11 +9,11 @@ import FiltersPanel from '../../components/FiltersPanel'
 import styles from './ListContainer.pcss'
 
 const ListContainer = (props) => {
-  const { items, toggleClosedStatus, markDeletedItem, editItemLabel, addItemToList, deletedItem } = props
+  const { items, toggleClosedStatus, markDeletedItem, editItemLabel, addItemToList, deleteItem } = props
   const [ inputValue, setInputValue ] = useState('')
   const [ filteredItems, setFilteredItems ] = useState(items)
   const [ filter, setFilter] = useState(null)
-  const [ activeItemsCount  , setActiveItemsCount ] = useState(0)
+  const [ activeItemsCount , setActiveItemsCount ] = useState(0)
 
   const MAX_STRING_LENGTH = 80
 
@@ -77,50 +77,50 @@ const ListContainer = (props) => {
   function recountActiveItems() {
     setActiveItemsCount(0)
     items.map(item => {
-      if(!item.closed) {
-        setActiveItemsCount(activeItemsCount => activeItemsCount + 1);
+      if (!item.closed) {
+        setActiveItemsCount(activeItemsCount => activeItemsCount + 1)
       }
     })
   }
 
   return (
-   <div className={styles.container}>
-     <ListHeader
-       headerValue={'ToDo List'}
-     >
-       <FiltersPanel
-         items={[
-           {
-             label: 'All',
-             value: 'all',
-             disabled: filteredItems.length === 0,
-           }, {
-             label: 'Active',
-             value: 'active',
-             disabled: activeItemsCount === 0,
-           }, {
-             label: 'Completed',
-             value: 'completed',
-             disabled: filteredItems.length - activeItemsCount === 0,
-           },
-         ]}
-         onClick={filterListItems}
-         inactive={!filteredItems.length}
-       />
-     </ListHeader>
-     <div className={styles.inputWrap}>
-       <InputField
-         value={inputValue}
-         tall={true}
-         withInsideButton={true}
-         buttonText={'ADD'}
-         placeHolderText={'Add task'}
-         onChange={onInputChange}
-         onKeyPress={onInputKeyPress}
-         onClick={addItemList}
-         maxLength={MAX_STRING_LENGTH}
-       />
-     </div>
+    <div className={styles.container}>
+      <ListHeader
+        headerValue={'ToDo List'}
+      >
+        <FiltersPanel
+          items={[
+            {
+              label: 'All',
+              value: 'all',
+              disabled: filteredItems.length === 0,
+            }, {
+              label: 'Active',
+              value: 'active',
+              disabled: activeItemsCount === 0,
+            }, {
+              label: 'Completed',
+              value: 'completed',
+              disabled: filteredItems.length - activeItemsCount === 0,
+            },
+          ]}
+          onClick={filterListItems}
+          inactive={!filteredItems.length}
+        />
+      </ListHeader>
+      <div className={styles.inputWrap}>
+        <InputField
+          value={inputValue}
+          tall={true}
+          withInsideButton={true}
+          buttonText={'ADD'}
+          placeHolderText={'Add task'}
+          onChange={onInputChange}
+          onKeyPress={onInputKeyPress}
+          onClick={addItemList}
+          maxLength={MAX_STRING_LENGTH}
+        />
+      </div>
       <div className={styles.listWrap}>
         {filteredItems.map((item, index) => (
           <React.Fragment key={item.id}>
@@ -131,7 +131,7 @@ const ListContainer = (props) => {
               id={item.id}
               changeCloseStatus={changeCloseStatus}
               markDeletedItem={markDeletedItem}
-              deletedItem={deletedItem}
+              deleteItem={deleteItem}
               editItemLabel={editItemLabel}
               refVal={item.id}
               index={index}
@@ -140,7 +140,7 @@ const ListContainer = (props) => {
           </React.Fragment>
         ))}
       </div>
-   </div>
+    </div>
   )
 }
 
@@ -155,7 +155,7 @@ const mapDispatchToProps = {
   markDeletedItem,
   editItemLabel,
   addItemToList,
-  deletedItem,
+  deleteItem,
 }
 
 ListContainer.propTypes = {
@@ -164,6 +164,7 @@ ListContainer.propTypes = {
   markDeletedItem: PropTypes.func,
   editItemLabel: PropTypes.func,
   addItemToList: PropTypes.func,
+  deleteItem: PropTypes.func,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListContainer)
