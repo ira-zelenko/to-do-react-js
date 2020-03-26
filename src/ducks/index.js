@@ -16,6 +16,14 @@ export function markDeletedItem(id) {
   }
 }
 
+export const DELETE_ITEM = 'DELETE_ITEM'
+export function deletedItem(id) {
+  return {
+    type: DELETE_ITEM,
+    id,
+  }
+}
+
 export const EDIT_ITEM_LABEL = 'EDIT_ITEM_LABEL'
 export function editItemLabel(id, label) {
   return {
@@ -49,6 +57,11 @@ export default function reducer(state = defaultState, action) {
       return {
         ...state,
         items: updateItemStatus(state.items, action.id, 'deleted')
+      }
+    case DELETE_ITEM:
+      return {
+        ...state,
+        items: state.items.filter(item => item.id !== action.id),
       }
     case EDIT_ITEM_LABEL:
       return  {

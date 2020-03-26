@@ -9,7 +9,7 @@ import SaveSvg from './icons/save.svg'
 import styles from './ListItem.pcss'
 
 const ListItem = (props) => {
-  const { text, deleted, closed, id, changeCloseStatus, markDeletedItem, editItemLabel, index } = props
+  const { text, deleted, closed, id, changeCloseStatus, markDeletedItem, editItemLabel, deletedItem } = props
   const [ isInputOpen, openInput ] = useState(false)
   const [ inputValue, setInputValue ] = useState(text)
 
@@ -31,6 +31,9 @@ const ListItem = (props) => {
 
   const markDeleted = useCallback(() => {
     markDeletedItem(id)
+    setTimeout(() => {
+      deletedItem(id)
+    }, 700)
   }, [])
 
   const toggleLabelInput = useCallback((isOpened) => {

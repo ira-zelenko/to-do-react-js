@@ -1,18 +1,28 @@
-import React from 'react'
+import React, { useCallback, useState } from 'react'
 import PropTypes from 'prop-types'
+import cn from 'classnames'
 import styles from './FiltersPanel.pcss'
 
 const FiltersPanel = (props) => {
 
   const { items, onClick } = props
+  const [ activeFilter, setActiveFilter ] = useState(null)
+
+  const setFilter = useCallback((value) => {
+    setActiveFilter(value)
+    onClick(value)
+  })
 
   return (
     <div className={styles.wrap}>
       {items.map(item => (
         <div
           key={item.value}
-          className={styles.filter}
-          onClick={onClick}
+          className={cn(styles.filter, {
+            [styles.disabled]: item.disabled,
+            [styles.active]: activeFilter === item.value,
+          })}
+          onClick={() => setFilter(item.value)}
         >
           {item.label}
         </div>
@@ -23,7 +33,7 @@ const FiltersPanel = (props) => {
 
 FiltersPanel.propTypes = {
   items: PropTypes.array,
-  onClick: PropTypes.func,
+  getFilterValue: PropTypes.func,
 }
 
 export default FiltersPanel

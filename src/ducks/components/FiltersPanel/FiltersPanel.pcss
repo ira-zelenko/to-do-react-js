@@ -23,7 +23,17 @@
 
 .filter:hover {
   background: var(--color-deep-ocean-medium);
-  color: var(--color-white-base)
+  color: var(--color-white-base);
+}
+
+.filter.disabled {
+  color: var(--color-deep-ocean-medium);
+  background: inherit;
+  cursor: not-allowed;
+}
+
+.filter.active {
+  background: red;
 }
 
 .filter:first-child {

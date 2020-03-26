@@ -1,7 +1,7 @@
 import React, { useCallback, useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { toggleClosedStatus, markDeletedItem, editItemLabel, addItemToList } from '../../../ducks/index'
+import { toggleClosedStatus, markDeletedItem, editItemLabel, addItemToList, deletedItem } from '../../../ducks/index'
 import ListHeader from '../../components/ListHeader'
 import ListItem from '../../components/ListItem'
 import InputField from '../../../components/InputField'
@@ -9,13 +9,19 @@ import FiltersPanel from '../../components/FiltersPanel'
 import styles from './ListContainer.pcss'
 
 const ListContainer = (props) => {
-  const { items, toggleClosedStatus, markDeletedItem, editItemLabel, addItemToList } = props
+  const { items, toggleClosedStatus, markDeletedItem, editItemLabel, addItemToList, deletedItem } = props
   const [ inputValue, setInputValue ] = useState('')
+  const [ filteredItems, setFilteredItems ] = useState(items)
+  const [ filter, setFilter] = useState(null)
+
+  useEffect(() => {
+    setFilteredItems(items)
+    filterListItems(filter)
+  }, [ items ])
 
   const changeCloseStatus = useCallback((id) => {
     toggleClosedStatus(id)
   }, [items])
-
 
   const addItemList = useCallback(() => {
     const newItem = {
@@ -26,7 +32,6 @@ const ListContainer = (props) => {
     }
     addItemToList(newItem)
     setInputValue('')
-
   }, [
     inputValue,
     items,
@@ -43,6 +48,25 @@ const ListContainer = (props) => {
     }
   }, [inputValue])
 
+  const filterList = useCallback((filter) => {
+      switch (filter) {
+        case 'all':
+          return items
+        case 'active':
+          return items.filter(item => item.closed === false)
+        case 'completed':
+          return items.filter(item => item.closed === true)
+        default:
+          return items
+      }
+  }, [ items ])
+
+  const filterListItems = useCallback((filter) => {
+    setFilter(filter)
+    const items = filterList(filter)
+    setFilteredItems(items)
+  }, [ items ])
+
   return (
    <div className={styles.container}>
      <ListHeader
@@ -52,17 +76,21 @@ const ListContainer = (props) => {
          items={[
            {
              label: 'All',
-             value: 'all'
+             value: 'all',
+             disabled: false,
            },
            {
              label: 'Active',
-             value: 'active'
+             value: 'active',
+             disabled: false,
            },
            {
              label: 'Completed',
-             value: 'completed'
+             value: 'completed',
+             disabled: false,
            },
          ]}
+         onClick={filterListItems}
        />
      </ListHeader>
      <div className={styles.inputWrap}>
@@ -78,7 +106,7 @@ const ListContainer = (props) => {
        />
      </div>
       <div className={styles.listWrap}>
-        {items.map((item, index) => (
+        {filteredItems.map((item, index) => (
           <React.Fragment key={item.id}>
             <ListItem
               text={item.text}
@@ -87,6 +115,7 @@ const ListContainer = (props) => {
               id={item.id}
               changeCloseStatus={changeCloseStatus}
               markDeletedItem={markDeletedItem}
+              deletedItem={deletedItem}
               editItemLabel={editItemLabel}
               refVal={item.id}
               index={index}
@@ -109,6 +138,7 @@ const mapDispatchToProps = {
   markDeletedItem,
   editItemLabel,
   addItemToList,
+  deletedItem,
 }
 
 ListContainer.propTypes = {
