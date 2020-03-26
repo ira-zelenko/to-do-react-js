@@ -23,14 +23,14 @@
 
   cursor: pointer;
 
-  color: var(--color-text-base);
+  color: var(--color-black-base);
 }
 .element:hover {
-  border: 1px solid var(--color-item-active);
+  border: 1px solid var(--color-aqua-accent);
 }
 
 .element.closed:hover {
-  border: 1px solid var(--color-item-close);
+  border: 1px solid var(--color-red-accent);
 }
 
 .element.deleted {
@@ -50,17 +50,17 @@
   left: -1px;
 
   border-radius: 4px 4px 0 0;
-  background: var(--color-item-active);
+  background: var(--color-aqua-accent);
 
   transition: background .25s ease;
 }
 
 .mark.closed {
-  background: var(--color-item-close);
+  background: var(--color-red-accent);
 }
 
 .mark.deleted {
-  background: var(--color-item-deleted);
+  background: var(--color-grey-light);
 }
 
 .content {

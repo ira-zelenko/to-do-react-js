@@ -1,12 +1,19 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styles from './ListHeader.pcss'
 
-const ListHeader = () => {
+const ListHeader = (props) => {
+  const { headerValue, children } = props
   return (
     <div className={styles.container}>
-      {'ToDo List'}
+      <div className={styles.header}>{headerValue}</div>
+      <div className={styles.content}>{ children }</div>
     </div>
   )
+}
+
+ListHeader.propTypes = {
+  headerValue: PropTypes.string,
 }
 
 export default ListHeader;

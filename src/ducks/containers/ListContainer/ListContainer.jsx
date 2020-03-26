@@ -5,6 +5,7 @@ import { toggleClosedStatus, markDeletedItem, editItemLabel, addItemToList } fro
 import ListHeader from '../../components/ListHeader'
 import ListItem from '../../components/ListItem'
 import InputField from '../../../components/InputField'
+import FiltersPanel from '../../components/FiltersPanel'
 import styles from './ListContainer.pcss'
 
 const ListContainer = (props) => {
@@ -44,7 +45,26 @@ const ListContainer = (props) => {
 
   return (
    <div className={styles.container}>
-     <ListHeader />
+     <ListHeader
+       headerValue={'ToDo List'}
+     >
+       <FiltersPanel
+         items={[
+           {
+             label: 'All',
+             value: 'all'
+           },
+           {
+             label: 'Active',
+             value: 'active'
+           },
+           {
+             label: 'Completed',
+             value: 'completed'
+           },
+         ]}
+       />
+     </ListHeader>
      <div className={styles.inputWrap}>
        <InputField
          value={inputValue}

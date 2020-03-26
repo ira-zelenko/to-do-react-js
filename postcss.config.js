@@ -4,13 +4,14 @@ module.exports = {
     'postcss-mixins': {},
     'postcss-css-variables': {
       variables: {
-        '--color-theme': 'rgba(51, 164, 167, .8)',
-        '--color-theme-light': 'rgba(51, 164, 167, .2)',
-        '--color-text-base': '#333333',
+        '--color-deep-ocean': 'rgba(51, 164, 167, .8)',
+        '--color-deep-ocean-medium': 'rgba(51, 164, 167, .3)',
+        '--color-deep-ocean-light': 'rgba(51, 164, 167, .2)',
+        '--color-black-base': '#333333',
         '--color-white-base': '#ffffff',
-        '--color-item-active': '#46d1de',
-        '--color-item-close': '#f44560',
-        '--color-item-deleted': '#e5e5e5',
+        '--color-aqua-accent': '#46d1de',
+        '--color-red-accent': '#f44560',
+        '--color-grey-light': '#e5e5e5',
         '--color-grey-additional': '#c8c8c8',
         '--color-grey-dark': '#757575',
 
