@@ -40,18 +40,20 @@
 .checkbox.checked:after {
   content: '\2714';
 }
+.labelWrap {
+  width: 456px;
+  display: block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
 
 .label {
   margin-left: 28px;
   padding: 0px 4px;
   cursor: pointer;
   position: relative;
-
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  width: 456px;
-  display: block;
+  display: inline;
 }
 
 .crossOutLine {

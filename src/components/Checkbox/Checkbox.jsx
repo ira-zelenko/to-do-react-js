@@ -21,12 +21,14 @@ const Checkbox = (props) => {
         checked={checked}
         onChange={toggleValue}
       />
-      <div className={styles.label}>
-        {label}
+      <div className={styles.labelWrap}>
+        <div className={styles.label}>
+          {label}
 
-        <div className={cn(styles.crossOutLine, {
-          [styles.visible]: checked,
-        })}/>
+          <div className={cn(styles.crossOutLine, {
+            [styles.visible]: checked,
+          })}/>
+        </div>
       </div>
     </div>
   )

@@ -15,7 +15,7 @@ const ListContainer = (props) => {
   const [ filter, setFilter] = useState(null)
   const [ activeItemsCount  , setActiveItemsCount ] = useState(0)
 
-  const MAX_STRING_LENGTH = 70
+  const MAX_STRING_LENGTH = 80
 
   useEffect(() => {
     setFilteredItems(items)
