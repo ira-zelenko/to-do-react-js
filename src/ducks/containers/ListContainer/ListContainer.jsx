@@ -28,6 +28,10 @@ const ListContainer = (props) => {
   }, [items])
 
   const addItemList = useCallback(() => {
+    if (!inputValue) {
+      return
+    }
+
     const newItem = {
       id: Number((Math.random() * 100).toFixed(0)),
       text: inputValue,
@@ -101,7 +105,7 @@ const ListContainer = (props) => {
             }, {
               label: 'Completed',
               value: 'completed',
-              disabled: filteredItems.length - activeItemsCount === 0,
+              disabled: items.length - activeItemsCount === 0,
             },
           ]}
           onClick={filterListItems}
