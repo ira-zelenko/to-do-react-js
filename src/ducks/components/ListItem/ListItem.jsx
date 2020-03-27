@@ -24,7 +24,12 @@ const ListItem = (props) => {
   })
 
   const handleClick = (event) => {
-    if (!event.path.includes(listItem.current) ) {
+    if (event.path && !event.path.includes(listItem.current)) {
+      toggleLabelInput(false)
+      return
+    }
+
+    if (!event.composedPath().includes(listItem.current)) {
       toggleLabelInput(false)
     }
   }
