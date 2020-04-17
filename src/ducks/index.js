@@ -1,4 +1,5 @@
 import itemsList from '../data/list-items-storage.json'
+import { FILTER_ALL_ITEMS } from '../data/filers'
 
 export const TOGGLE_CLOSED_STATUS = 'TOGGLE_CLOSED_STATUS'
 export function toggleClosedStatus(id) {
@@ -35,15 +36,23 @@ export function editItemLabel(id, label) {
 
 export const ADD_ITEM_TO_LIST = 'ADD_ITEM_TO_LIST'
 export function addItemToList(item) {
-
   return {
     type: ADD_ITEM_TO_LIST,
     item,
   }
 }
 
+export const SET_ACTIVE_FILTER = 'SET_ACTIVE_FILTER'
+export function setActiveFilter(filter) {
+  return {
+    type: SET_ACTIVE_FILTER,
+    filter,
+  }
+}
+
 const defaultState = {
   items: itemsList || [],
+  activeFilter: FILTER_ALL_ITEMS,
 }
 
 export default function reducer(state = defaultState, action) {
@@ -72,6 +81,11 @@ export default function reducer(state = defaultState, action) {
       return {
         ...state,
         items: [action.item, ...state.items],
+      }
+    case SET_ACTIVE_FILTER:
+      return {
+        ...state,
+        activeFilter: action.filter,
       }
 
     default:

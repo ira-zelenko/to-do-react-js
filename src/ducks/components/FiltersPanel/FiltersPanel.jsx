@@ -1,15 +1,13 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback } from 'react'
 import PropTypes from 'prop-types'
 import cn from 'classnames'
 import styles from './FiltersPanel.pcss'
 
 const FiltersPanel = (props) => {
 
-  const { items, onClick, inactive } = props
-  const [ activeFilter, setActiveFilter ] = useState(null)
+  const { items, onClick, inactive, activeFilter } = props
 
   const setFilter = useCallback((value) => {
-    setActiveFilter(value)
     onClick(value)
   })
 
@@ -20,7 +18,7 @@ const FiltersPanel = (props) => {
           key={item.value}
           className={cn(styles.filter, {
             [styles.disabled]: item.disabled,
-            [styles.active]: activeFilter === item.value,
+            [styles.active]: activeFilter === item.value && !inactive,
             [styles.inactive]: inactive,
           })}
           onClick={() => setFilter(item.value)}
@@ -36,6 +34,7 @@ FiltersPanel.propTypes = {
   items: PropTypes.array,
   onClick: PropTypes.func,
   inactive: PropTypes.bool,
+  activeFilter: PropTypes.string,
 }
 
 export default FiltersPanel
