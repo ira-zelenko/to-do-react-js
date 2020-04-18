@@ -1,4 +1,3 @@
-import itemsList from '../../data/list-items-storage.json'
 import { API_REQUEST } from '../middleware/api'
 import { FILTER_ALL_ITEMS } from '../../data/filers'
 
@@ -11,7 +10,7 @@ export function loadListData() {
     type: 'LOAD_LIST',
     [API_REQUEST]: {
       types: [ LOAD_LIST_FETCHING, LOAD_LIST_SUCCESS, LOAD_LIST_FAIL ],
-      url: 'https://api.github.com/users/hackeryou',
+      url: 'http://localhost:8080/get',
     },
   }
 }
@@ -66,7 +65,7 @@ export function setActiveFilter(filter) {
 }
 
 const defaultState = {
-  items: itemsList || [],
+  items: [],
   activeFilter: FILTER_ALL_ITEMS,
 }
 
@@ -110,6 +109,7 @@ export default function reducer(state = defaultState, action) {
     case LOAD_LIST_SUCCESS: {
       return {
         ...state,
+        items: action.data,
       }
     }
     case LOAD_LIST_FAIL: {
