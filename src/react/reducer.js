@@ -1,4 +1,4 @@
 import { combineReducers } from 'redux'
-import list from './ducks/index'
+import list from './ducks'
 
 export default combineReducers({ list })

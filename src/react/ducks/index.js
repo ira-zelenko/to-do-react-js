@@ -1,5 +1,20 @@
-import itemsList from '../data/list-items-storage.json'
-import { FILTER_ALL_ITEMS } from '../data/filers'
+import itemsList from '../../data/list-items-storage.json'
+import { API_REQUEST } from '../middleware/api'
+import { FILTER_ALL_ITEMS } from '../../data/filers'
+
+export const LOAD_LIST_FETCHING = 'LOAD_LIST_FETCHING'
+export const LOAD_LIST_SUCCESS = 'LOAD_LIST_SUCCESS'
+export const LOAD_LIST_FAIL = 'LOAD_LIST_FAIL'
+
+export function loadListData() {
+  return {
+    type: 'LOAD_LIST',
+    [API_REQUEST]: {
+      types: [ LOAD_LIST_FETCHING, LOAD_LIST_SUCCESS, LOAD_LIST_FAIL ],
+      url: 'https://api.github.com/users/hackeryou',
+    },
+  }
+}
 
 export const TOGGLE_CLOSED_STATUS = 'TOGGLE_CLOSED_STATUS'
 export function toggleClosedStatus(id) {
@@ -87,7 +102,26 @@ export default function reducer(state = defaultState, action) {
         ...state,
         activeFilter: action.filter,
       }
-
+    case LOAD_LIST_FETCHING: {
+      return {
+        ...state,
+      }
+    }
+    case LOAD_LIST_SUCCESS: {
+      return {
+        ...state,
+      }
+    }
+    case LOAD_LIST_FAIL: {
+      return {
+        ...state,
+      }
+    }
+    case 'LOAD_LIST': {
+      return {
+        ...state,
+      }
+    }
     default:
       return state
   }

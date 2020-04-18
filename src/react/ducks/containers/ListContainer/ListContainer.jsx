@@ -1,8 +1,16 @@
 import React, { useCallback, useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { toggleClosedStatus, markDeletedItem, editItemLabel, addItemToList, deleteItem, setActiveFilter } from '../../../ducks/index'
-import { FILTER_ALL_ITEMS, FILTER_ACTIVE, FILTER_COMPLETED } from '../../../data/filers'
+import {
+  toggleClosedStatus,
+  markDeletedItem,
+  editItemLabel,
+  addItemToList,
+  deleteItem,
+  setActiveFilter,
+  loadListData,
+} from '../../index'
+import { FILTER_ALL_ITEMS, FILTER_ACTIVE, FILTER_COMPLETED } from '../../../../data/filers'
 import ListHeader from '../../components/ListHeader'
 import ListItem from '../../components/ListItem'
 import InputField from '../../../components/InputField'
@@ -10,12 +18,16 @@ import FiltersPanel from '../../components/FiltersPanel'
 import styles from './ListContainer.pcss'
 
 const ListContainer = (props) => {
-  const { items, activeFilter, toggleClosedStatus, markDeletedItem, editItemLabel, addItemToList, deleteItem, setActiveFilter } = props
+  const { items, activeFilter, toggleClosedStatus, markDeletedItem, editItemLabel, addItemToList, deleteItem, setActiveFilter, loadListData } = props
   const [ inputValue, setInputValue ] = useState('')
   const [ filteredItems, setFilteredItems ] = useState(items)
   const [ activeItemsCount , setActiveItemsCount ] = useState(0)
 
   const MAX_STRING_LENGTH = 80
+
+  useEffect(() => {
+    loadListData()
+  }, [])
 
   useEffect(() => {
     filterListItems(activeFilter)
@@ -165,6 +177,7 @@ const mapDispatchToProps = {
   addItemToList,
   deleteItem,
   setActiveFilter,
+  loadListData,
 }
 
 ListContainer.propTypes = {
@@ -176,6 +189,7 @@ ListContainer.propTypes = {
   deleteItem: PropTypes.func,
   setActiveFilter: PropTypes.func,
   activeFilter: PropTypes.string,
+  loadListData: PropTypes.func,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListContainer)
